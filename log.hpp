@@ -12,13 +12,11 @@ enum class logLvl{
 class Logger{
   public: 
 	Logger() : isFile(false) {}
-	Logger(std::string& fileName, const std::string& prefix = ""): prefix(prefix)
+	Logger(const std::string& fileName, const std::string& prefix = ""): prefix(prefix)
 	{
 		fout.open(fileName);
 	}
 	Logger& operator()(const logLvl& lvl);
-	friend std::ostream& operator<<(std::ostream& os,
-	 const std::string& message);
 
 	template<typename T>
 	Logger& operator<<(const T& message);
