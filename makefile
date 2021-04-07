@@ -5,11 +5,9 @@ build: a.out
 clean: 
 	rm -f *.o a.out
 
-a.out: main.o log.o
-	g++ main.o log.o
+a.out: main.cpp log.o
+	g++ main.cpp log.o -lpthread
 
-main.o: main.cpp
-	g++ -c main.cpp
 
-log.o: log.cpp
-	g++ -c log.cpp
+log.o: log.cpp log.hpp
+	g++ -c log.cpp -lpthread
