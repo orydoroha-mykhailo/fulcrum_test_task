@@ -32,19 +32,18 @@ class Logger{
 		}
 		~Logger()
 		{
+			std::stringstream ss;
+			ss << time
+				<< "; "<< whatLevel() 
+				<< "; "<< prefix << "(" << std::this_thread::get_id() 
+				<< "): " << logs.str() << std::endl;
 			if(isFile)
-			if(fout.good())
-		{
-			fout << time
-				<< "; "<< whatLevel() 
-				<< "; "<< prefix << "(" << std::this_thread::get_id() 
-				<< "): " << logs.str() << std::endl;
-		}else{}
-		else
-			std::cout << time
-				<< "; "<< whatLevel() 
-				<< "; "<< prefix << "(" << std::this_thread::get_id() 
-				<< "): " << logs.str() << std::endl;
+				if(fout.good())
+				{
+					fout << ss.str();
+				}else{}
+			else
+				std::cout << ss.str();
 		}
   private:
 		std::string whatLevel() const;
